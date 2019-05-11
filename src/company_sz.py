@@ -57,6 +57,7 @@ def download(bulletinId, announceTime, name):
 totalRecordNum = getMaxPage()
 pageSize = 30
 max_page = totalRecordNum / pageSize
+indexAll = 0
 
 # 循环房间　下载数据　　
 for pageNum in range(0, max_page):
@@ -92,7 +93,7 @@ for pageNum in range(0, max_page):
         name = announcementTitle + nameEnd
 
         delimiter = '_'
-        list = [secCode, secName, time, name]
+        list = [str(indexAll), secCode, secName, timefile, name]
         fileName = delimiter.join(list).strip()
 
         download(announcementId, time, fileName)
