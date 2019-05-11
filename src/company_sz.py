@@ -5,6 +5,7 @@
 import requests
 from urllib import urlencode
 import urllib
+import time
 
 base_url = 'http://www.cninfo.com.cn/new/hisAnnouncement/query'
 header = {
@@ -51,7 +52,7 @@ def download(bulletinId, announceTime, name):
 
     print 'download:', name
     urllib.urlretrieve(url, filePath)
-
+    time.sleep(0.2)
 
 # 　脚本开始的地方　
 totalRecordNum = getMaxPage()
@@ -87,7 +88,7 @@ for pageNum in range(0, max_page):
         adjunctUrl = item.get('adjunctUrl').encode('utf-8')
 
         indexTime = adjunctUrl.find('/', 1)
-        time = adjunctUrl[indexTime + 1:indexTime + 10]
+        timefile = adjunctUrl[indexTime + 1:indexTime + 10]
         indexNameEnd = adjunctUrl.find('.', 1)
         nameEnd = adjunctUrl[indexNameEnd:]
         name = announcementTitle + nameEnd
@@ -96,4 +97,4 @@ for pageNum in range(0, max_page):
         list = [str(indexAll), secCode, secName, timefile, name]
         fileName = delimiter.join(list).strip()
 
-        download(announcementId, time, fileName)
+        download(announcementId, timefile, fileName)
