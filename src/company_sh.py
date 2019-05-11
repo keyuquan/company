@@ -29,7 +29,7 @@ def getMaxPage():
         'searchkey': '社会责任',
         'column': column,
         'plate': plate,
-        'seDate': '2010-01-01 ~ 2019-01-01'
+        'seDate': '2010-01-01 ~ 2020-01-01'
     }
 
     response = requests.post(base_url, data=urlencode(params), headers=header)
