@@ -49,7 +49,7 @@ def download(bulletinId, announceTime, name):
     filePath = 'files_sh/'
     filePath = filePath + name
 
-    print 'download:', name
+    print 'download:', name, 'totalRecordNum:', totalRecordNum
     urllib.urlretrieve(url, filePath)
 
     time.sleep(0.2)

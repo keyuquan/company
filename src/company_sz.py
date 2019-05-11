@@ -50,7 +50,7 @@ def download(bulletinId, announceTime, name):
     filePath = 'files_sz/'
     filePath = filePath + name
 
-    print 'download:', name
+    print 'download:', name ,'totalRecordNum:',  totalRecordNum
     urllib.urlretrieve(url, filePath)
     time.sleep(0.2)
 
@@ -81,6 +81,7 @@ for pageNum in range(0, max_page):
     totalRecordNum = json.get('totalAnnouncement')
 
     for index, item in enumerate(json.get('announcements')):
+        indexAll=indexAll+1
         announcementTitle = item.get('announcementTitle').encode('utf-8')
         secName = item.get('secName').encode('utf-8')
         secCode = item.get('secCode').encode('utf-8')
