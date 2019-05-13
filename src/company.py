@@ -77,7 +77,6 @@ def reptile(totalNum, pageSize=30):
 
         response = requests.post(base_url, data=urlencode(params), headers=header)
         json = response.json()
-        totalRecordNum = json.get('totalAnnouncement')
 
         for index, item in enumerate(json.get('announcements')):
             announcementTitle = item.get('announcementTitle').encode('utf-8')
