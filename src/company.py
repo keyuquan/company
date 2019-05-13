@@ -5,7 +5,6 @@
 import requests
 from urllib import urlencode
 import urllib
-import time
 
 base_url = 'http://www.cninfo.com.cn/new/hisAnnouncement/query'
 
@@ -58,17 +57,16 @@ def download(bulletinId, announceTime, name):
 
     print 'download:', name ,'totalRecordNum:',  totalRecordNum
     urllib.urlretrieve(url, filePath)
-    time.sleep(0.2)
+    
 
 # 　脚本开始的地方　
 totalRecordNum = getMaxPage()
 pageSize = 30
 max_page = totalRecordNum / pageSize
-indexAll = 0
 
 # 循环　下载数据　　
 for pageNum in range(1, max_page+1):
-
+   
     params = {
         'pageNum': pageNum,
         'pageSize': pageSize,
@@ -84,7 +82,6 @@ for pageNum in range(1, max_page+1):
     totalRecordNum = json.get('totalAnnouncement')
 
     for index, item in enumerate(json.get('announcements')):
-        indexAll=indexAll+1
         announcementTitle = item.get('announcementTitle').encode('utf-8')
         secName = item.get('secName').encode('utf-8')
         secCode = item.get('secCode').encode('utf-8')
@@ -98,6 +95,7 @@ for pageNum in range(1, max_page+1):
         name = announcementTitle + nameEnd
 
         delimiter = '_'
+        indexAll =(pageNum-1)*pageSize + index+1
         list = [str(indexAll), secCode, secName, timefile, name]
         fileName = delimiter.join(list).strip()
 
