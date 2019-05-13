@@ -29,12 +29,14 @@ header = {
 
 
 # 下载文件
-def download(bulletinId, announceTime, name):
+def download(bulletinId, announceTime, name, totalNum):
     delimiter = ''
     list = ['http://www.cninfo.com.cn/new/announcement/download?bulletinId=', bulletinId, '&announceTime=',
             announceTime]
     url = delimiter.join(list).strip()
     filePath = filepath + name
+
+    print 'download:', name, 'totalNum:', totalNum
     urllib.urlretrieve(url, filePath)
 
 
@@ -59,9 +61,10 @@ def getTotalNum():
 
 # 循环爬取数据　
 def reptile(totalNum, pageSize=30):
-    max_page = totalNum / pageSize
+    max_page = totalNum / pageSize + 2
+
     # 循环　下载数据　　
-    for pageNum in range(2, max_page + 1):
+    for pageNum in range(1, max_page):
 
         params = {
             'pageNum': pageNum,
@@ -93,8 +96,7 @@ def reptile(totalNum, pageSize=30):
             list = [str(indexAll), secCode, secName, timefile, name]
             fileName = delimiter.join(list).strip()
 
-            print 'download:', name, 'totalNum:', totalNum
-            download(announcementId, timefile, fileName)
+            download(announcementId, timefile, fileName, totalNum)
 
 
 if __name__ == '__main__':
