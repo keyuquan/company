@@ -6,18 +6,27 @@ import requests
 from urllib import urlencode
 import urllib
 import time
+
 base_url = 'http://www.cninfo.com.cn/new/hisAnnouncement/query'
+
+# 深主板变量　
+refer='http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-szse-main'
+column = 'szse'
+plate = 'szmb'
+filepath='files_sz/'
+
+# 上海主板变量
+# column = 'sse'
+# plate = 'shmb'
+# referer='http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-sse'
+
 header = {
     'Host': 'www.cninfo.com.cn',
     'Origin': 'http://www.cninfo.com.cn',
-    'Referer': 'http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-sse',
+    'Referer': refer,
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
     'X-Requested-With': 'XMLHttpRequest',
 }
-
-# 上海主板变量
-column = 'sse'
-plate = 'shmb'
 
 
 # 获取文件数量
@@ -45,26 +54,20 @@ def download(bulletinId, announceTime, name):
     list = ['http://www.cninfo.com.cn/new/announcement/download?bulletinId=', bulletinId, '&announceTime=',
             announceTime]
     url = delimiter.join(list).strip()
+    filePath = filepath + name
 
-    filePath = 'files_sh/'
-    filePath = filePath + name
-
-    print 'download:', name, 'totalRecordNum:', totalRecordNum
+    print 'download:', name ,'totalRecordNum:',  totalRecordNum
     urllib.urlretrieve(url, filePath)
-
     time.sleep(0.2)
-
 
 # 　脚本开始的地方　
 totalRecordNum = getMaxPage()
 pageSize = 30
 max_page = totalRecordNum / pageSize
 indexAll = 0
-# 循环房间　下载数据　　
-for pageNum in range(0, max_page):
 
-    if pageNum == max_page:
-        pageSize = totalRecordNum % pageSize
+# 循环房间　下载数据　　
+for pageNum in range(1, max_page+1):
 
     params = {
         'pageNum': pageNum,
@@ -73,7 +76,7 @@ for pageNum in range(0, max_page):
         'searchkey': '社会责任',
         'column': column,
         'plate': plate,
-        'seDate': '2000-01-01 ~ 2020-01-01'
+        'seDate': '2010-01-01 ~ 2020-01-01'
     }
 
     response = requests.post(base_url, data=urlencode(params), headers=header)
@@ -81,7 +84,7 @@ for pageNum in range(0, max_page):
     totalRecordNum = json.get('totalAnnouncement')
 
     for index, item in enumerate(json.get('announcements')):
-        indexAll = indexAll + 1
+        indexAll=indexAll+1
         announcementTitle = item.get('announcementTitle').encode('utf-8')
         secName = item.get('secName').encode('utf-8')
         secCode = item.get('secCode').encode('utf-8')
