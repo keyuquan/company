@@ -66,7 +66,7 @@ pageSize = 30
 max_page = totalRecordNum / pageSize
 indexAll = 0
 
-# 循环房间　下载数据　　
+# 循环　下载数据　　
 for pageNum in range(1, max_page+1):
 
     params = {
