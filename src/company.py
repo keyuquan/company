@@ -35,8 +35,6 @@ def download(bulletinId, announceTime, name):
             announceTime]
     url = delimiter.join(list).strip()
     filePath = filepath + name
-
-    print 'download:', name
     urllib.urlretrieve(url, filePath)
 
 
@@ -95,6 +93,7 @@ def reptile(totalNum, pageSize=30):
             list = [str(indexAll), secCode, secName, timefile, name]
             fileName = delimiter.join(list).strip()
 
+            print 'download:', name, 'totalNum:', totalNum
             download(announcementId, timefile, fileName)
 
 
