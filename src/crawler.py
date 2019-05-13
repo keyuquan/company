@@ -61,7 +61,7 @@ def getTotalNum():
 
 
 # 循环爬取数据　
-def reptile(totalNum, pageSize=30):
+def crawler(totalNum, pageSize=30):
     max_page = totalNum / pageSize + 2
 
     # 循环　下载数据　　
@@ -102,4 +102,4 @@ def reptile(totalNum, pageSize=30):
 
 if __name__ == '__main__':
     totalNum = getTotalNum()
-    reptile(totalNum)
+    crawler(totalNum)
