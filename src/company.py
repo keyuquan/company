@@ -9,15 +9,15 @@ import urllib
 base_url = 'http://www.cninfo.com.cn/new/hisAnnouncement/query'
 
 # 深主板变量　
-refer = 'http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-szse-main'
-column = 'szse'
-plate = 'szmb'
-filepath = 'files_sz/'
+# refer = 'http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-szse-main'
+# column = 'szse'
+# plate = 'szmb'
+# filepath = 'files_sz/'
 
-# 上海主板变量
-# column = 'sse'
-# plate = 'shmb'
-# referer='http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-sse'
+#上海主板变量
+column = 'sse'
+plate = 'shmb'
+refer='http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-sse'
 
 header = {
     'Host': 'www.cninfo.com.cn',
