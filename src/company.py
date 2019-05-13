@@ -18,6 +18,7 @@ base_url = 'http://www.cninfo.com.cn/new/hisAnnouncement/query'
 column = 'sse'
 plate = 'shmb'
 refer='http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice-sse'
+filepath = 'files_sh/'
 
 header = {
     'Host': 'www.cninfo.com.cn',
